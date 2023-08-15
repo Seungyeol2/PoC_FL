@@ -12,6 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 import numpy as np
 from sklearn import metrics
+import time
 
 torch.manual_seed(2020)
 np.random.seed(2020)
@@ -33,7 +34,7 @@ class LocalUpdate(object):
             loader = DataLoader(data, shuffle=False, batch_size=self.args.local_bs)
         return loader
 
-    def update_weights(self, model, global_round):
+    def update_weights(self, model, local_epoch, global_round):
         model.train()
         epoch_loss = []
         lr = self.args.lr
@@ -42,10 +43,9 @@ class LocalUpdate(object):
             optimizer = torch.optim.Adam(model.parameters(), lr=lr)
         elif self.args.opt == 'sgd':
             optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=self.args.momentum)
-
-        for iter in range(self.args.local_epoch):
+        39
+        for iter in range(local_epoch):
             batch_loss = []
-
             for batch_idx, (xc, xp, y) in enumerate(self.train_loader):
                 xc, xp = xc.float().to(self.device), xp.float().to(self.device)
                 y = y.float().to(self.device)
@@ -58,9 +58,8 @@ class LocalUpdate(object):
                 optimizer.step()
 
                 batch_loss.append(loss.item())
-
+                
             epoch_loss.append(sum(batch_loss)/len(batch_loss))
-
         return model.state_dict(), sum(epoch_loss)/len(epoch_loss), epoch_loss
 
 

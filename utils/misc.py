@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
------------------------------------------------
-# File: misc.py
-# This file is created by Chuanting Zhang
-# Email: chuanting.zhang@kaust.edu.sa
-# Date: 2020-07-26 (YYYY-MM-DD)
------------------------------------------------
-"""
+
 import argparse
 import h5py
 import pandas as pd
@@ -154,7 +147,7 @@ def args_parser():
     parser.add_argument('--pattern', type=str, default='tp', help='clustering based on geo location or tp')
     parser.add_argument('--directory', type=str, default='results/',
                         help='directory to store result')
-    parser.add_argument('--seed', type=int, default=1, help='random seeds')
+    parser.add_argument('--seed', type=int, default=random.randint(0, 2**32 - 1), help='random seeds')
     parser.add_argument('--shallow', type=str, default='svr', help='shallow algorithms')
 
     args = parser.parse_args()
@@ -162,37 +155,8 @@ def args_parser():
 
 def send_data(args):
     path = os.getcwd()
-    f = h5py.File(path + '/dataset/' + args.file, 'r')
-
-    idx = f['idx'][()]
-    cell = f['cell'][()]
-    lng = f['lng'][()]
-    lat = f['lat'][()]
-    data = f[args.type][()][:, cell - 1]
-
-    df = pd.DataFrame(data, index=pd.to_datetime(idx.ravel(), unit='s'), columns=cell)
-    df.fillna(0, inplace=True)
-
-    random.seed(args.seed)
-    cell_pool = cell
-    selected_cells = sorted(random.sample(list(cell_pool), len(cell_pool)))
-    selected_cells_idx = np.where(np.isin(list(cell), selected_cells))
-    cell_lng = lng[selected_cells_idx]
-    cell_lat = lat[selected_cells_idx]
-    # print('Selected cells:', selected_cells)
-
-    df_cells = df[selected_cells]
-    # print(df_cells.head())
-
-    train_data = df_cells.iloc[:-args.test_days * 24]
-
-    mean = train_data.mean()
-    std = train_data.std()
-
-    normalized_df = (df_cells - mean) / std
-
-    return normalized_df, df_cells, selected_cells, mean, std, cell_lng, cell_lat
-
+    file_size = os.path.getsize(path + '/dataset/' + args.file)
+    return file_size
 
 def get_data(args):
     path = os.getcwd()
