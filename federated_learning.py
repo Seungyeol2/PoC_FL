@@ -21,7 +21,7 @@ def sizeof_data(data):
     """Returns the size of the data in bytes."""
     return len(pickle.dumps(data))
 
-def sparsify_weights(weights, threshold=1e-2):
+def sparsify_weights(weights, threshold=1e-3):
     sparsified_weights = {}
     for key, weight in weights.items():
         # Set weights smaller than the threshold to 0.
@@ -29,7 +29,7 @@ def sparsify_weights(weights, threshold=1e-2):
         sparsified_weights[key] = weight * mask
     return sparsified_weights
 
-def sparse_update(local_weights, global_weights, threshold=0.3):
+def sparse_update(local_weights, global_weights, threshold=0.5):
     updated_weights = {}
     for name, local_weight in local_weights.items():
         global_weight = global_weights[name]
