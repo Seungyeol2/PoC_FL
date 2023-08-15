@@ -14,7 +14,7 @@ First one [Milano](https://drive.google.com/file/d/1aKh1icdmK9ho3mOZiNg593ivgIey
 
 "We aim to use publicly available wireless traffic data from mobile communication networks to compare the communication overhead between federated learning applied in a distributed environment and centralized learning. The purpose is to ascertain the reduction percentage in communication volume attributable to federated learning. The total reduction rate for communication volume during learning is defined as follows."
 
-- Total communication overhead for learning = Federated learning communication overhead / Centralized learning communication overhead
+- Reduction rate of communication overhead = Federated learning communication overhead / Centralized learning communication overhead
 
 
 ## Acknowledgement
