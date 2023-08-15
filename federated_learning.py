@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
------------------------------------------------
-# File: fed_avg_algo.py
-# This file is created by Chuanting Zhang
-# Email: chuanting.zhang@kaust.edu.sa
-# Date: 2020-01-13 (YYYY-MM-DD)
------------------------------------------------
-"""
+
 import numpy as np
 import h5py
 import tqdm
