@@ -29,7 +29,7 @@ def sparsify_weights(weights, threshold=1e-2):
         sparsified_weights[key] = weight * mask
     return sparsified_weights
 
-def sparse_update(local_weights, global_weights, threshold=0.8):
+def sparse_update(local_weights, global_weights, threshold=0.3):
     updated_weights = {}
     for name, local_weight in local_weights.items():
         global_weight = global_weights[name]
@@ -146,8 +146,9 @@ if __name__ == '__main__':
             local_losses.append(copy.deepcopy(loss))
             cell_loss.append(loss)
             total_communication_fl += bytes_to_local + bytes_to_server
-
-        print(f"Round {epoch} Total communication_overhead: {total_communication_fl} KB")
+            
+        print(f"\nGlobal Round {epoch + 1} - Loss: {sum(cell_loss)/len(cell_loss):.4f}")
+        print(f"Global Round {epoch + 1 } - Total communication_overhead: {total_communication_fl} KB")
 
         loss_hist.append(sum(cell_loss)/len(cell_loss))
 
