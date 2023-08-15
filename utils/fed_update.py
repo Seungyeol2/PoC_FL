@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 """
------------------------------------------------
-# File: fed_update.py
-# This file is created by Chuanting Zhang
-# Email: chuanting.zhang@kaust.edu.sa
-# Date: 2020-01-13 (YYYY-MM-DD)
------------------------------------------------
+
 """
 import torch
 from torch import nn
