@@ -16,6 +16,8 @@ First one [Milano](https://drive.google.com/file/d/1aKh1icdmK9ho3mOZiNg593ivgIey
 
 - Reduction rate of communication overhead = Federated learning communication overhead / Centralized learning communication overhead
 
+![System](./system.png)
+
 
 ## Acknowledgement
 Development of Distributed/Cooperative AI based 5G+ Network Data Analytics Functions and Control Technology

@@ -1,0 +1,10 @@
+[2023-08-17 13:58:08] Global Round 1 - Total communication_overhead: 2902084 KB
+[2023-08-17 13:58:20] Global Round 2 - Total communication_overhead: 5274570 KB
+[2023-08-17 13:58:37] Global Round 3 - Total communication_overhead: 7911855 KB
+[2023-08-17 13:59:16] Global Round 4 - Total communication_overhead: 10745389 KB
+[2023-08-17 13:59:56] Global Round 5 - Total communication_overhead: 13116532 KB
+[2023-08-17 14:00:33] Global Round 6 - Total communication_overhead: 15753817 KB
+[2023-08-17 14:01:11] Global Round 7 - Total communication_overhead: 18192166 KB
+[2023-08-17 14:01:50] Global Round 8 - Total communication_overhead: 20633202 KB
+[2023-08-17 14:02:29] Global Round 9 - Total communication_overhead: 23399529 KB
+[2023-08-17 14:03:08] Global Round 10 - Total communication_overhead: 25444038 KB

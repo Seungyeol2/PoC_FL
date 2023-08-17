@@ -11,8 +11,16 @@ import random
 import pickle
 import time
 import torch.quantization
+import datetime
 
+# Create a logging file
+logfile = "results_" + datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + ".txt"
 
+def log_print(s):
+    with open(logfile, 'a') as f:
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        f.write(f"[{timestamp}] {s}\n")
+    
 def sizeof_model(model_dict):
     """Returns the size of the model in bytes."""
     return len(pickle.dumps(model_dict))
@@ -143,11 +151,14 @@ if __name__ == '__main__':
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
             cell_loss.append(loss)
+
+            log_print(f"client{cell} bytes_to_local : {bytes_to_local}")
+            log_print(f"client{cell} bytes_to_server : {bytes_to_server}")
             total_communication_fl += bytes_to_local + bytes_to_server
             
         print(f"\nGlobal Round {epoch + 1} - Loss: {sum(cell_loss)/len(cell_loss):.4f}")
         print(f"Global Round {epoch + 1 } - Total communication_overhead: {total_communication_fl} KB")
-
+        log_print(f"Global Round {epoch + 1 } - Total communication_overhead: {total_communication_fl} KB")
         loss_hist.append(sum(cell_loss)/len(cell_loss))
 
         # Update global model
@@ -181,3 +192,4 @@ if __name__ == '__main__':
     print('[Federated Learning] File: {:} Type: {:} MSE: {:.4f} MAE: {:.4f}, NRMSE: {:.4f}'.format(args.file, args.type, mse, mae,
                                                                                      nrmse))
     print(f"Total federated learning communication overhead: {total_communication_fl / (1024 * 1024):.2f} MB")
+    log_print(f"Total federated learning communication overhead: {total_communication_fl / (1024 * 1024):.2f} MB")
